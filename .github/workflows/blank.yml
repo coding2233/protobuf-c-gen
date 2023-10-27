@@ -37,8 +37,7 @@ jobs:
           
       - name: Install Library
         run: |
-          apt update
-          apt install -y autoconf automake libtool  curl make g++ unzip pkg-config
+          apt install -y autoconf automake libtool curl make g++ unzip pkg-config
           protoc --version
           protoc-c --version
 
