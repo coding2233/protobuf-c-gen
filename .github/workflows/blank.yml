@@ -38,19 +38,15 @@ jobs:
       - name: Install Library
         run: |
           sudo apt-get update
-          sudo apt-get install -y autoconf automake libtool curl make g++ unzip pkg-config
+          sudo apt-get install -y autoconf automake libtool curl make g++ unzip pkg-config bazel
 
       - name: Make Protobuf
         run: |
           git clone https://github.com/protocolbuffers/protobuf.git
           cd protobuf
           git submodule update --init --recursive
-          ./autogen.sh
-          ./configure
-          make
-          make check
-          make install
-          ldconfig # refresh shared library cache.
+          bazel build :protoc :protobuf
+          cp bazel-bin/protoc /usr/local/bin
           cd ..
           protoc --version
           
